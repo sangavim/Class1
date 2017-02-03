@@ -14,15 +14,63 @@ public class AddUtil {
             throw new IllegalArgumentException("Assert fail") ;
         }
     }
-    private static int add(int a, int b){
-        //Write your code here
+    
+  private static int add(int a, int b){
+    return a + b;
+  }
+
+  private static Integer characterToInteger(Character c) {
+    return Integer.parseInt(String.valueOf(c));
+  }
+
+  private static void stringNumberToIntegerQueue(Queue<Integer> queue,
+      String number) {
+    int idx = number.length() - 1;
+    while (idx >= 0) {
+      queue.add(characterToInteger(number.charAt(idx)));
+      idx--;
+    }
+  }
+
+  private static String integerStackToStringNumber(Stack<Integer> stack) {
+    String result = "";
+    while (stack.size() > 0) {
+      result += stack.pop();
+    }
+    return result;
+  }
+
+  private static String add(String a, String b) {
+    Queue<Integer> firstNumberQueue = new LinkedBlockingQueue<>();
+    Queue<Integer> secondNumberQueue = new LinkedBlockingQueue<>();
+    Stack<Integer> resultNumberStack = new Stack<>();
+
+    stringNumberToIntegerQueue(firstNumberQueue, a);
+    stringNumberToIntegerQueue(secondNumberQueue, b);
+
+    boolean repeat = true;
+    int firstNumberDigit, secondNumberDigit, carryDigit = 0;
+    while (repeat) {
+      firstNumberDigit = secondNumberDigit = 0;
+      repeat = false;
+      if (firstNumberQueue.size() > 0) {
+        firstNumberDigit = firstNumberQueue.remove();
+        repeat = true;
+      }
+      if (secondNumberQueue.size() > 0) {
+        secondNumberDigit = secondNumberQueue.remove();
+        repeat = true;
+      }
+
+      int sum = carryDigit + firstNumberDigit + secondNumberDigit;
+      carryDigit = sum / 10;
+      resultNumberStack.add(sum % 10);
     }
 
-    private static String add(String a, String b) {
-        //Write your code here
-    }
-
-    private static boolean testStringAdd(String a, String b){
+    return integerStackToStringNumber(resultNumberStack);
+  }
+    
+  private static boolean testStringAdd(String a, String b){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         String s = add(a,b);
         BigInteger sum = new BigInteger(s);

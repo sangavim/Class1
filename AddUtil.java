@@ -14,13 +14,67 @@ public class AddUtil {
             throw new IllegalArgumentException("Assert fail") ;
         }
     }
-    private static int add(int a, int b){
+    private static int add(int a, int b)
+    {
         //Write your code here
+        System.out.println(a+b);
+        return a + b;
     }
+
 
     private static String add(String a, String b) {
         //Write your code here
+        Stack myStack = new Stack();
+        int carry = 0;
+        int len1 = String.valueOf(a).length();
+        int len2 = String.valueOf(b).length();
+        len1 = len1 - 1;
+        len2 = len2 - 1;
+        int s = 0, sum;
+        int e,f;
+        char c,d;
+        String result = "";
+
+        while(true){
+            if(len1 < 0){
+                c = '0';
+                d = b.charAt(len2);
+            }
+            else if(len2 < 0){
+                d = '0';
+                c = a.charAt(len1);
+            }
+            else {
+                c = a.charAt(len1);
+                d = b.charAt(len2);
+            }
+            e = Character.getNumericValue(c);
+            f = Character.getNumericValue(d);
+
+            s = e + f + carry;
+
+            sum = s % 10;
+            carry = s / 10;
+            myStack.push(sum);
+            len1--;
+            len2--;
+
+            if ((len1) < 0 && (len2) < 0){
+                if (carry>0){
+                    myStack.push(carry);
+                }
+                break;
+            }
+        }
+        while (!(myStack.empty())){
+            result += myStack.pop();
+        }
+        System.out.println();
+        System.out.println(result);
+
+        return result;
     }
+    
 
     private static boolean testStringAdd(String a, String b){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
@@ -52,6 +106,7 @@ public class AddUtil {
     public static void main(String args[]){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         System.out.println("AddUtil.java");
+        System.out.println();
         testBench();
         System.out.println("DONE");
     }

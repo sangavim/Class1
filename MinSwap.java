@@ -35,7 +35,35 @@ public class MinSwap {
     }
     private static int minSwaps(int a[]){
         //WRITE YOUR CODE HERE...
+        int p1=0, p2 = a.length - 1, temp,swap=0;
+        while(p1 < p2){
+            if (a[p1] == 0){
+                if(a[p2]  != 0){
+                    temp = a[p1];
+                    a[p1] = a[p2];
+                    a[p2] = temp;
+                    p1 ++;
+                    p2 --;
+                    swap ++;
+                }
+                else{
+                    p2 --;
+                }
+            }
+            else if (a[p1] != 0){
+                if(a[p2]  == 0){
+                    p1 ++;
+                    p2 --;
+                }
+                else{
+                    p1 ++;
+                }
+            }
+        }
+        printArray(a);
+        return swap;
     }
+ 
     private static void testBench(){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         int[] a1 = {1,2,0,3,0,4,5};

@@ -34,36 +34,87 @@ public class BrowserStack {
             throw new IllegalArgumentException("Assert fail") ;
         }
     }
+    
     //push() - pushes the element in this case its a url (String)
     private  void push(String url){
-        //WRITE YOUR CODE HERE
+        top++;
+        myStack[top] = url;
     }
+
     //pop()- pops the element from the stack
     private String pop(){
-        //WRITE YOUR CODE HERE
+        String popElement = myStack[top];
+        top--;
+        return popElement;
 
     }
-
+    
+    //print stack elements
     private void printStack(){
-        //WRITE YOUR CODE HERE
-
+        int i;
+        System.out.println("Stack Elements: ");
+        for(i = top; i >=0; i--){
+            System.out.println(myStack[i]);
+        }
     }
+
+    //peek at the top element
     private  String peek(){
-        //WRITE YOUR CODE HERE
-
+        System.out.println("Peek: "+myStack[top]);
+        System.out.println("After peek: ");
+        printStack();
+        return myStack[top];
     }
+    
+    //size of the stack
     private  int size(){
-        //WRITE YOUR CODE HERE
-
+        int i,count = 0;
+        for(i = 0; i <= top; i++){
+            count++;
+        }
+        return count;
     }
+    
+    //check whether the stack is Empty
     private  boolean isEmpty(){
-        //WRITE YOUR CODE HERE
-
+        int stackSize = size();
+        boolean empty = false;
+        if(stackSize == 0){
+            System.out.println("Empty Stack");
+            empty = true;
+        }
+        else{
+            System.out.println("Stack is not empty.");
+        }
+        return empty;
     }
-    private  boolean search(String url){
-        //WRITE YOUR CODE HERE
 
+    //Search an element 
+    private boolean search(String url){
+        int i = 0, j = 0;
+        String[] tempStack = new String[16];
+        boolean found = false;
+        while(top >= 0) {
+            if (myStack[top].equals(url)) {
+                found = true;
+                System.out.printf("%s is at %d index", url,top);
+                System.out.println();
+                break;
+            } else {
+                tempStack[i] = pop();
+                i++;
+            }
+        }
+        if (!found){
+            System.out.println(url+" is not in stack");
+        }
+        for (j = i-1; j >= 0; j--){
+            top++;
+            myStack[top] = tempStack[j];
+        }
+        return found;
     }
+    
     private static void testBench(BrowserStack browserStack){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         browserStack.push("g.co");

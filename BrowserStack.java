@@ -68,11 +68,7 @@ public class BrowserStack {
     
     //size of the stack
     private  int size(){
-        int i,count = 0;
-        for(i = 0; i <= top; i++){
-            count++;
-        }
-        return count;
+        return top+1;
     }
     
     //check whether the stack is Empty

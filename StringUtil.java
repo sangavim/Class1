@@ -7,8 +7,26 @@
  */
 public class StringUtil {
 
-    private static String[] URLParser(String url){
-        //WRITE YOUR CODE HERE..
+       private static String[] URLParser(String url){
+        //WRITE YOUR CODE HERE.
+
+       String result = "hi";
+       String[] splittedUrl = url.split("[\\?\\&]");
+       String[] resultArray = new String[5];
+       for(int i = 1;i < splittedUrl.length; i++ ){
+
+           resultArray[i-1] = String.valueOf(splittedUrl[i].split("="));
+
+
+       }
+       System.out.println(resultArray[1]);
+       String sys = "{"+ "client_id:SS}";
+
+       return resultArray;
+
+
+
+
         //parse the url and get all the get parameters and return an array of Strings
         //Input: google.com/api?param1=value1&param2=value2
         //Output: array of strings [] = { {param1:value1}, {param2:value2} }
@@ -16,10 +34,43 @@ public class StringUtil {
     }
     private static String reverseWords(String sentence){
         //WRITE YOUR CODE HERE..
+        Stack wordStack = new Stack();
+        String result = "";
+        if(sentence == null){
+            return sentence;
+        }
+        else {
+            String[] splittedWords = sentence.split(" ");
+            int splitLength = splittedWords.length - 1;
+            for (int i = 0; i <= splitLength; i++) {
+                wordStack.push(splittedWords[i]);
+                if (i < splitLength) {
+                    wordStack.push(" ");
+                }
+            }
+            while (!(wordStack.empty())) {
+                result += wordStack.pop();
+            }
+            return result;
+        }
     }
 
-    private static String reverseString(String sentence){
-        //WRITE YOUR CODE HERE..
+    private static String reverseString(String sentence) {
+        Stack stringStack = new Stack();
+        Queue stringQueue = new LinkedBlockingQueue();
+        String result = "";
+        String[] splittedStrings = sentence.split(" ");
+        int splitLength = splittedStrings.length - 1;
+        for (int i = 0; i <= splitLength; i++) {
+            stringQueue.add((new StringBuffer(splittedStrings[i]).reverse().toString()));
+            if (i<splitLength){
+                stringQueue.add(" ");
+            }
+        }
+        while (!(stringQueue.isEmpty())){
+            result += stringQueue.remove();
+        }
+        return result;
     }
     public static void myassert(boolean  x) {
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS

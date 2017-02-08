@@ -8,13 +8,22 @@
 public class StringUtil {
     
     private static String[] URLParser(String url){
-       String result = "hi";
+       String result;
+       String[] tempArray = new String[2];
        String[] splittedUrl = url.split("[\\?\\&]");
        String[] resultArray = new String[5];
-       for(int i = 1;i < splittedUrl.length; i++ ){
-           resultArray[i-1] = String.valueOf(splittedUrl[i].split("="));
+       for(int i = 1;i <= splittedUrl.length-1; i++ ){
+           result="";
+           tempArray =splittedUrl[i].split("=");
+           result += "{";
+           result += tempArray[0];
+           result += ":";
+           result += tempArray[1];
+           result += "}";
+           resultArray[i-1] = result;
        }
        return resultArray;
+
     }
     
     private static String reverseWords(String sentence){

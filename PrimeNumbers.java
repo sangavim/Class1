@@ -15,12 +15,41 @@ public class PrimeNumbers {
     }
 
     private static int secondMaxSixDigitPrime(){
-        //WRITE YOUR CODE HERE
+        int num,i,check,max=0;
+        for (check = 999999; check >= 100000; check--){
+            int count = 0;
+            num = check/2;
+            for(i = 2; i <= num; i++){
+                if(check % i == 0){
+                    count++;
+                }
+            }
+            if(count == 0){
+                max ++;
+                if(max == 2){
+                    break;
+                }
+            }
+        }
+        return check;
     }
 
-
     private static List<Integer> fourDigitPrimes(){
-        //WRITE YOUR CODE HERE
+        int i,num,check;
+        ArrayList<Integer> primes = new ArrayList<>();
+        for (check = 1000; check <= 9999; check++){
+            int count = 0;
+            num = check/2;
+            for(i = 2; i <= num; i++){
+                if(check % i == 0){
+                    count = count + 1;
+                }
+            }
+            if(count == 0){
+                primes.add(check);
+            }
+        }
+        return primes;
     }
 
     private static void testBench(){

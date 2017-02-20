@@ -39,10 +39,61 @@ public class TailorSort {
         return true;
     }
 
-    private static Integer[] addCoats(Integer[] inputCoats, int index){
-        //WRITE YOUR CODE HERE
-        //RETURN THE RESULT COATS ARRAY WITH ALL SORTED
-        //YOU HAVE TO DO MINIMUM COMPARISONS, CLUE: USE index parameter in your sorting technique
+     private static Integer[] sortRight(Integer[] unsorted) {
+        boolean changed = true;
+        int i = 0, temp;
+        while (changed == true){
+            changed = false;
+            for (i = 0; i < unsorted.length - 1; i++) {
+                if (unsorted[i] > unsorted[i + 1]){
+                    temp = unsorted[i];
+                    unsorted[i] = unsorted[i + 1];
+                    unsorted [i + 1] = temp;
+                    changed = true;
+                }
+            }
+        }
+        System.out.println("########## Sorted Right Array ##########");
+        printArray(unsorted);
+        return unsorted;
+    }
+    
+    private static Integer[] merge(Integer[] sortedLeft, Integer[] sortedRight){
+        Integer[] resultArray = new Integer[10];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while(i < sortedLeft.length && j < sortedRight.length) {
+            if (sortedLeft[i] < sortedRight[j]) {
+                resultArray[k] = sortedLeft[i];;
+                i++;
+            }
+            else{
+                resultArray[k] = sortedRight[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < sortedLeft.length) {
+            resultArray[k] = sortedLeft[i];
+            i++;
+            k++;
+        }
+        while (j < sortedRight.length) {
+            resultArray[k] = sortedRight[j];
+            j++;
+            k++;
+        }
+        return resultArray;
+    }
+    
+    private static Integer[] addCoats(Integer[] inputCoats, int index) {
+        int last = inputCoats.length;
+        Integer[] sortedLeft = Arrays.copyOf(inputCoats, index);
+        Integer[] unsorted = Arrays.copyOfRange(inputCoats, index, last);
+        Integer[] sortedRight = sortRight(unsorted);
+        Integer[] result = merge(sortedLeft, sortedRight);
+        return result;
     }
 
     private static void testBench(){

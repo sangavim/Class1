@@ -39,10 +39,20 @@ public class TailorSort {
         return true;
     }
 
-    private static Integer[] addCoats(Integer[] inputCoats, int index){
-        //WRITE YOUR CODE HERE
-        //RETURN THE RESULT COATS ARRAY WITH ALL SORTED
-        //YOU HAVE TO DO MINIMUM COMPARISONS, CLUE: USE index parameter in your sorting technique
+    private static Integer[] addCoats(Integer[] inputCoats, int index) {
+        int last = inputCoats.length;
+        int j, k;
+       for (int i = index; i < last; i++){
+            j = i - 1;
+            k = inputCoats[i];
+           while ((j>=0) && (k < inputCoats[j])){
+               inputCoats[j + 1] =  inputCoats[j];
+               j--;
+           }
+           inputCoats[j + 1] = k;
+       }
+        return inputCoats;
+
     }
 
     private static void testBench(){

@@ -1,0 +1,53 @@
+String Compressor: ----------- Input: "aabcccccaaa" ----------- Output: a2 b1 c5 a3
+
+def compressor(inpstr):
+    for i in inpstr:
+        if compressed.has_key(i):
+            compressed[i] = compressed.get(i) + 1
+        else:
+            if len(compressed) > 0:
+                print ''.join("{!s}{!r}".format(key,val) for (key,val) in compressed.items()),
+                compressed.clear()
+            compressed[i] = 1
+    return compressed
+
+inp = "aabcccccaaa" 
+compressed = {}
+compressor(inp)
+print ''.join("{!s}{!r}".format(key,val) for (key,val) in compressed.items())
+
+###################################################################################
+
+Stock Profit: ----------- Input: [7, 1, 5, 3, 6, 4] ----------- Output: 5
+              ----------- Input: [7, 6, 4, 3, 1] -------------- Output: 0
+def maxprofit(a):
+    length = len(a)
+    profit = 0
+    for i in range(length-1, -1, -1):
+        for j in range(i-1, -1, -1):
+            diff = a[i] - a[j]
+            if diff > profit:
+                profit = diff
+    return profit
+    
+buyprice = [7, 1, 5, 3, 6, 4]
+print "Maximum Profit: ", maxprofit(buyprice)
+
+#####################################################################################
+
+Distinct Elements: --------- Input: [3,4,6,2,1,6,8] ---------Output False
+                   --------- Input: [2,3,1,7,6]  ------------Output True
+def distinct(arr):
+    arr1 = set(arr)
+    if len(arr1) == len(arr):
+        return True
+    else:
+        return False
+        
+print distinct([2,3,1,7,6])
+                   
+                   
+
+
+
+

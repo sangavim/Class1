@@ -1,0 +1,71 @@
+-----------------------Number Check-------------------------------------
+import string
+import re
+
+def numcheck(str1):
+    if str == "":
+        return False
+    elif str1.count(".")>1 or str1.endswith("."):
+        return False
+    elif str1.count("-") and str1.count("+") == 1:
+        return False
+    elif str1.count("-") or str1.count("+") == 1:
+        if str1.startswith("-") or str1.startswith("+"):
+            return True
+    else:
+        return False
+    return True
+
+str1 = "+123001.29"
+print numcheck(str1)
+
+
+s = re.match(r'[+|-]?[0-9]+[\.]?[0-9]+$',str1)     #regex pattern
+if s:
+    print "True"
+else:
+    print "False"
+
+Input: "+123001.29"  Output: True
+Input: "1234"        Output: True
+Input: "123+1"       Output: False
+Input: "12.12.0"     Output: False
+
+-----------------------Equilibrium-------------------------------------
+
+def equi(arr):
+    leftSum = 0
+    rightSum = sum(arr)
+    for i in range(len(arr)):
+        rightSum -= arr[i]
+        if leftSum == rightSum:
+            return i, arr[i]
+        leftSum += arr[i]
+    return -1
+arr = [2,1,4,1,1,1]
+print equi(arr)
+
+Input: [2,1,4,1,1,1]  Output: (2,4)  # Index-2, Number-4 
+
+---------------------Expression-----------------------------------------
+
+def checkValid(exp):
+  dict = {"}":"{", "]":"[" ,")":"("}
+  exp = "{[]}"
+  list1 = []
+  for i in exp:
+      if dict.has_key(i) and list1:
+          list1.pop()
+      else:
+          list1.append(i)
+  return list1
+
+exp = "{[]}"
+valid = checkValid(exp)
+if not valid:
+    print "Valid Expression"
+else:
+    print "Invalid Expression"
+    
+Input: "{[()]}"  Output: Valid Expression
+Input: "{[())]}"  Output: Invalid Expression
